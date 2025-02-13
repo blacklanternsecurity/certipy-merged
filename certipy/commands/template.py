@@ -104,14 +104,14 @@ class Template:
                                    )
         print(ldap_formatted_template)
         results = self.connection.search(
-            search_filter=f"(&(cn={ldap_formatted_template})(objectClass=pKICertificateTemplate))",
+            search_filter=f"(&(cn={ldap_formatted_template})objectClass~=pKICertificateTemplate))",
             search_base=self.connection.configuration_path,
             query_sd=True,
         )
 
         if len(results) == 0:
             results = self.connection.search(
-                f"(&(displayName={ldap_formatted_template})(objectClass=pKICertificateTemplate))",
+                f"(&(displayName={ldap_formatted_template})(objectClass~=pKICertificateTemplate))",
                 search_base=self.connection.configuration_path,
                 query_sd=True,
             )
